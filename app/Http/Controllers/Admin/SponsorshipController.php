@@ -29,7 +29,8 @@ class SponsorshipController extends Controller
     //     return view('admin.sponsorships.show', compact('sponsorship'));
     // }
 
-    public function payment(Request $request) {
+    public function payment(Request $request)
+    {
         $user = Auth::user();
         $apartments = Apartment::all();
         $value = $request->value;
@@ -48,7 +49,8 @@ class SponsorshipController extends Controller
         ]);
     }
 
-    public function checkout(Request $request) {
+    public function checkout(Request $request)
+    {
         $gateway = new Gateway([
             'environment' => 'sandbox',
             'merchantId' => '7jxbczhxqzdxss5x',
@@ -68,13 +70,13 @@ class SponsorshipController extends Controller
         if ($result->success) {
             $transaction = $result->transaction;
             $user = User::find(Auth::user()->id);
-            return back()->with('success_message', 'Transazione eseguita con successo. ID transazione: ' .$transaction->id);
+            return back()->with('success_message', 'Transazione eseguita con successo. ID transazione: ' . $transaction->id);
         } else {
             $errorString = '';
             foreach ($result->errors->deepAll() as  $error) {
                 $errorString .= 'Error: ' . $error->code . ': ' . $error->message . '\n';
             }
-            return back()->withErrors('C\'è stato un errore: ' .$result->message );
+            return back()->withErrors('C\'è stato un errore: ' . $result->message);
         }
     }
 }
