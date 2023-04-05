@@ -1,0 +1,59 @@
+// Fonts
+@import url("https://fonts.googleapis.com/css?family=Nunito");
+
+// Variables
+@import "variables";
+
+// Register
+@import "register";
+
+// Bootstrap
+@import "~bootstrap/scss/bootstrap";
+
+$fa-font-path: "./fonts/font-awesome" !default;
+@import "~@fortawesome/fontawesome-free/scss/fontawesome";
+@import "~@fortawesome/fontawesome-free/scss/regular";
+@import "~@fortawesome/fontawesome-free/scss/solid";
+@import "~@fortawesome/fontawesome-free/scss/brands";
+
+//resto del codice
+.overlay {
+    display: flex;
+    position: fixed;
+    inset: 0;
+    text-align: center;
+    background-color: rgba($color: rgb(0, 0, 0), $alpha: 0.7);
+}
+
+.delete_confirmation {
+    margin: auto;
+    padding: 1.5rem;
+    width: 300px;
+    height: 150px;
+    background-color: white;
+    border-radius: 0.5rem;
+}
+
+.hover-underline-animation {
+    display: inline-block;
+    position: relative;
+    color: #0087ca;
+}
+
+.hover-underline-animation::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #0087ca;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+}
+
+.hover-underline-animation:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
