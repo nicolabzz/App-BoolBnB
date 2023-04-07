@@ -4,11 +4,8 @@
     <h1>{{ Auth::user()->name }}'s apartments</h1>
 
 
-    @if($apartments->isEmpty())
-            <p>Your dashboard is empty, <a href="{{ route('admin.apartments.create') }}">click here to create!</a></p>
-            <div>
-                <a href="{{ route('admin.dashboard') }}" class="btn btn-info">Back to dashboard</a>
-            </div>
+    @if ($apartments->isEmpty())
+        <p>Your dashboard is empty, <a href="{{ route('admin.apartments.create') }}">click here to create!</a></p>
     @else
         <table class="table table-striped">
             <thead>
@@ -32,7 +29,9 @@
                         </td>
                         <td>
                             <div class="mb-3 form-check form-switch">
-                                <input class="form-check-input" checked type="checkbox" role="switch" id="flexSwitchCheckChecked" @error('visibility') is-invalid @enderror id="visibility" name="visibility"  value="{{ old('visibility', $apartment->visibility) }}">
+                                <input class="form-check-input" checked type="checkbox" role="switch"
+                                    id="flexSwitchCheckChecked" @error('visibility') is-invalid @enderror id="visibility"
+                                    name="visibility" value="{{ old('visibility', $apartment->visibility) }}">
                                 <label class="form-check-label" for="flexSwitchCheckChecked"></label>
                                 @error('visibility')
                                     <div class="invalid-feedback">
@@ -46,10 +45,13 @@
                             </div>
                         </td>
                         <td>
-                            <a href="{{ route('admin.apartments.show', ['apartment' => $apartment]) }}" class="btn btn-primary">Show</a>
-                            <a href="{{ route('admin.apartments.edit', ['apartment' => $apartment]) }}" class="btn btn-warning">Edit</a>
-                            <button class="btn btn-danger btn_delete" data-id="{{ $apartment->slug}}">Delete</button>
-                            <a href="{{ route('admin.sponsorships.index', ['apartment' => $apartment]) }}" class="btn btn-info mx-5">Boost</a>
+                            <a href="{{ route('admin.apartments.show', ['apartment' => $apartment]) }}"
+                                class="btn btn-primary">Show</a>
+                            <a href="{{ route('admin.apartments.edit', ['apartment' => $apartment]) }}"
+                                class="btn btn-warning">Edit</a>
+                            <button class="btn btn-danger btn_delete" data-id="{{ $apartment->slug }}">Delete</button>
+                            <a href="{{ route('admin.sponsorships.index', ['apartment' => $apartment]) }}"
+                                class="btn btn-info mx-5">Boost</a>
                         </td>
                     </tr>
                 @endforeach
@@ -57,18 +59,11 @@
         </table>
     @endif
 
-
     {{ $apartments->links() }}
 
-
-    @if ($apartments->isEmpty())
-        <p></p>
-    @else
-        <div>
-            <a href="{{ route('admin.dashboard') }}" class="btn btn-info" data-id="{{ $apartment->slug}}">Back to dashboard</a>
-        </div>
-    @endif
-
+    <div>
+        <a href="{{ route('admin.dashboard') }}" class="btn btn-info">Back to dashboard</a>
+    </div>
 
     @include('admin.partials.delete_confirmation', [
         'delete_name' => 'apartment',
